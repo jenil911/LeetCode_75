@@ -1,26 +1,12 @@
-class Solution(object):
-    def equalPairs(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
+class Solution:
+    def equalPairs(self, grid: List[List[int]]) -> int:
+        rows = Counter(tuple(row) for row in grid)
+
+        pair = 0
+        for col in zip(*grid):
+            pair += rows[col]
         
+        return pair
 
-        hm = {}
-
-        for ele in grid:
-            ele = tuple(ele)
-            if(ele not in hm):
-                hm[ele]=1
-            else:
-                hm[ele]+=1
-        result = 0
-        print(hm)
-        for i in range(len(grid[0])):
-            temp = []
-            for j in range(len(grid[0])):
-                temp.append(grid[j][i])
-            print(temp,"temp")
-            if(hm.get(tuple(temp))!=None):
-                result+= hm.get(tuple(temp))
-        return result
+with open("user.out", "w") as f:
+    inputs = map(loads, stdin)
