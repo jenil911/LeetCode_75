@@ -1,17 +1,12 @@
 class Solution:
     def minFlips(self, a: int, b: int, c: int) -> int:
-        operations = 0
-        while a > 0 or b > 0 or c > 0:
+        ans = 0
+        while a or b or c:
             if c & 1:
-                if not (a & 1 or b & 1):
-                    operations += 1
+                ans += 0 if ((a & 1) or (b & 1)) else 1
             else:
-                if a & 1:
-                    operations += 1
-                if b & 1:
-                    operations += 1
+                ans += (a & 1) + (b & 1)
             a >>= 1
             b >>= 1
             c >>= 1
-
-        return operations
+        return ans
